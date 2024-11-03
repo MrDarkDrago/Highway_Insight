@@ -1,0 +1,201 @@
+/* Reset default styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 200px;
+    width: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f4f6f9;
+}
+
+.navbar {
+    background-color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .nav-link {
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+    color: #0078D4;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../assets/images/bus-hero.png') center/cover no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-top: 10px;
+    line-height: 1.6;
+}
+
+.hero .btn-primary {
+    margin-top: 20px;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #0078D4;
+    border: none;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.hero .btn-primary:hover {
+    background-color: #005bb5;
+}
+
+/* Section Styling */
+.features, .how-it-works, .testimonials, .contact {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.section-title h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.section-title h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #0078D4;
+    margin: 10px auto 0;
+}
+
+.features .row div, .how-it-works .row div {
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.features .row div:hover, .how-it-works .row div:hover {
+    transform: translateY(-5px);
+}
+
+.features h4, .how-it-works h4 {
+    font-size: 1.25rem;
+    color: #0078D4;
+}
+
+.features p, .how-it-works p {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* Testimonials Carousel */
+.testimonials .carousel-inner {
+    max-width: 80%;
+    margin: auto;
+}
+
+.testimonials .carousel-inner p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.testimonials .carousel-inner p b {
+    color: #0078D4;
+}
+
+/* Contact Form */
+.contact .form-control {
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    transition: border-color 0.3s ease;
+}
+
+.contact .form-control:focus {
+    border-color: #0078D4;
+    box-shadow: 0 0 8px rgba(0, 120, 212, 0.2);
+}
+
+.contact button[type="submit"] {
+    background-color: #0078D4;
+    color: #fff;
+    border: none;
+    padding: 10px 30px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.contact button[type="submit"]:hover {
+    background-color: #005bb5;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+/* Responsive styling */
+@media (max-width: 992px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .features h4, .how-it-works h4 {
+        font-size: 1.1rem;
+    }
+
+    .features p, .how-it-works p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 60px 20px;
+    }
+
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .features, .how-it-works, .testimonials, .contact {
+        padding: 40px 20px;
+    }
+
+    .features .row div, .how-it-works .row div {
+        margin-top: 15px;
+    }
+}

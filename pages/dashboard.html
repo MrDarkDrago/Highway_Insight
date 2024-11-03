@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Highway Bus Booking</title>
+    
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg py-4 py-lg-0 shadow">
+    <div class="container px-4">
+        <a href="../index.html"><img src="../assets/images/logo.png" alt="logo"></a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbar" aria-controls="navbar">
+            <i class="bi bi-list"></i>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="navbar" aria-labelledby="navbarLabel">
+            <ul class="navbar-nav ms-lg-auto p-4 p-lg-0">
+                <li class="nav-item px-3 py-1 py-lg-4"><a class="nav-link" href="../index.html">Home</a></li>
+                <li class="nav-item px-3 py-1 py-lg-4"><a class="nav-link" href="../pages/booking.html">Book a Trip</a></li>
+                <li class="nav-item px-3 py-1 py-lg-4"><a class="nav-link" href="../pages/dashboard.html">Dashboard</a></li>
+                <li class="nav-item px-3 py-1 py-lg-4"><a class="nav-link" href="#">Routes</a></li>
+                <li class="nav-item px-3 py-1 py-lg-4"><a class="nav-link" href="../pages/signin.html" id="signin">Sign In</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Dashboard Section -->
+<section class="dashboard-section py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <aside class="col-md-3 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Dashboard</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a href="#upcoming-trips" class="nav-link">Upcoming Trips</a></li>
+                            <li class="nav-item"><a href="#booking-history" class="nav-link">Booking History</a></li>
+                            <li class="nav-item"><a href="#notifications" class="nav-link">Notifications</a></li>
+                            <li class="nav-item"><a href="#account-settings" class="nav-link">Account Settings</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <div class="col-md-9">
+                <!-- Welcome Message -->
+                <div class="mb-4">
+                    <h3>Welcome, [User's Name]!</h3>
+                    <p class="text-muted">Here's a quick overview of your account and recent activities.</p>
+                </div>
+
+                <!-- Upcoming Trips -->
+                <div id="upcoming-trips" class="mb-5">
+                    <h5>Upcoming Trips</h5>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <p>No upcoming trips found. <a href="booking.html">Book a trip now!</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking History -->
+                <div id="booking-history" class="mb-5">
+                    <h5>Booking History</h5>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <p>No past bookings available.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications -->
+                <div id="notifications" class="mb-5">
+                    <h5>Notifications</h5>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <p>No new notifications.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Settings -->
+                <div id="account-settings" class="mb-5">
+                    <h5>Account Settings</h5>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <p>Manage your account details and preferences here.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer bg-dark text-light py-4">
+    <div class="container text-center">
+        <p>&copy; 2024 Highway Bus Booking. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

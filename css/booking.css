@@ -1,0 +1,63 @@
+.booking-section {
+    background-color: #f4f6f9;
+    padding: 60px 0;
+}
+
+.search-bar .form-label {
+    font-weight: bold;
+    color: #333;
+}
+
+
+
+.bus-list .card {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.select-seat-btn {
+    margin-top: 10px;
+}
+
+.seat-map {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.seat-row {
+    display: flex;
+    gap: 10px;
+}
+
+.seat {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.seat.available {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.seat.reserved {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.booking-summary {
+    border-top: 2px solid #0078D4;
+    padding-top: 20px;
+    margin-top: 40px;
+}
+
+img {
+    max-width: 200px;
+    width: 100%;
+}

@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+}
+
+.navbar .nav-link.active {
+    color: #0078D4;
+}
+
+.signin-section {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch; /* Make items the same height */
+    justify-content: center;
+    gap: 40px;
+}
+
+.card, .signin-section img {
+    height: 100%; /* Make card and image the same height */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    padding: 30px;
+    max-width: 400px;
+    flex: 1; /* Allow the card to fill space proportionally */
+}
+
+.card h3 {
+    color: #333;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #0078D4;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #005bb5;
+}
+
+/* Image Styling */
+.signin-section img {
+    max-width: 1000px;
+    width: 100%;
+    object-fit: cover; /* Ensures image fits within the set height */
+}
+
+/* Footer */
+.footer {
+    background-color: #333;
+    color: #fff;
+    font-size: 0.875rem;
+    text-align: center;
+    padding: 15px 0;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .signin-section img {
+        max-width: 300px;
+    }
+
+    .card {
+        padding: 20px;
+        max-width: 100%;
+    }
+}
