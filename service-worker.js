@@ -1,25 +1,28 @@
 const CACHE_NAME = "bus-booking-cache-v1";
 const urlsToCache = [
-    "/",
-    "/index.html",
-    "/dashboard.html",
-    "/booking.html",
-    "/signin.html",
-    "/signup.html",
-    "/css/dashboard.css",
-    "/css/signup.css",
-    "/css/signin.css",
-    "/css/booking.css",
-    "/manifest.json",
-    "/assets/images/icons/icon_72x72.png",
-    "/assets/images/icons/icon_96x96.png",
-    "/assets/images/icons/icon_128x128.png",
-    "/assets/images/icons/icon_144x144.png",
-    "/assets/images/icons/icon_152x152.png",
-    "/assets/images/icons/icon_192x192.png",
-    "/assets/images/icons/icon_512x512.png",
+    "/Highway_Insight/",
+    "/Highway_Insight/index.html",
+    "/Highway_Insight/dashboard.html",
+    "/Highway_Insight/booking.html",
+    "/Highway_Insight/signin.html",
+    "/Highway_Insight/signup.html",
+    "/Highway_Insight/css/dashboard.css",
+    "/Highway_Insight/css/signup.css",
+    "/Highway_Insight/css/signin.css",
+    "/Highway_Insight/css/booking.css",
+    "/Highway_Insight/manifest.json",
+    "/Highway_Insight/assets/images/icons/icon_72x72.png",
+    "/Highway_Insight/assets/images/icons/icon_96x96.png",
+    "/Highway_Insight/assets/images/icons/icon_128x128.png",
+    "/Highway_Insight/assets/images/icons/icon_144x144.png",
+    "/Highway_Insight/assets/images/icons/icon_152x152.png",
+    "/Highway_Insight/assets/images/icons/icon_192x192.png",
+    "/Highway_Insight/assets/images/icons/icon_512x512.png",
     "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 ];
+
+navigator.serviceWorker.register('/Highway_Insight/service-worker.js')
+
 
 // Install the service worker and cache resources
 self.addEventListener("install", (event) => {
@@ -40,7 +43,7 @@ self.addEventListener("fetch", (event) => {
             // Return cached response or fetch from the network
             return response || fetch(event.request).catch(() => {
                 if (event.request.mode === 'navigate') {
-                    return caches.match('/index.html'); // Fallback to index.html
+                    return caches.match('/Highway_Insight/index.html'); // Fallback to index.html
                 }
                 return caches.match('/fallback.html'); // Optional fallback page
             });
