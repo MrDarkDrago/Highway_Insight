@@ -21,6 +21,7 @@ const urlsToCache = [
     "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 ];
 
+// Install the service worker and cache resources
 self.addEventListener("install", (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
@@ -32,26 +33,22 @@ self.addEventListener("install", (event) => {
     );
 });
 
-
-window.addEventListener("beforeinstallprompt", (event) => {
-    event.preventDefault(); // Prevent automatic prompt
-    console.log("PWA Installable");
-    // Optionally show your own UI to trigger install
-});
-
-
+// Cache and update requests
 self.addEventListener("fetch", (event) => {
     event.respondWith(
         caches.match(event.request).then((response) => {
-            // Try fetching from cache or make a network request
+            // Return cached response or fetch from the network
             return response || fetch(event.request).catch(() => {
-                return caches.match("/index.html"); // Fallback page
+                if (event.request.mode === 'navigate') {
+                    return caches.match('/index.html'); // Fallback to index.html
+                }
+                return caches.match('/fallback.html'); // Optional fallback page
             });
         })
     );
 });
 
-
+// Update the service worker and clean up old caches
 self.addEventListener("activate", (event) => {
     const cacheWhitelist = [CACHE_NAME];
     event.waitUntil(
