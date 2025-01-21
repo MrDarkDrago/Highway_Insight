@@ -43,18 +43,14 @@ window.addEventListener("beforeinstallprompt", (event) => {
 self.addEventListener("fetch", (event) => {
     event.respondWith(
         caches.match(event.request).then((response) => {
-            return response || fetch(event.request).then((fetchResponse) => {
-                return caches.open(CACHE_NAME).then((cache) => {
-                    cache.put(event.request, fetchResponse.clone());
-                    return fetchResponse;
-                });
-            }).catch((error) => {
-                console.error("Fetch failed, returning cached content if available", error);
-                return caches.match(event.request);
+            // Try fetching from cache or make a network request
+            return response || fetch(event.request).catch(() => {
+                return caches.match("/index.html"); // Fallback page
             });
         })
     );
 });
+
 
 self.addEventListener("activate", (event) => {
     const cacheWhitelist = [CACHE_NAME];
