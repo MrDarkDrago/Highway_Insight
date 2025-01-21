@@ -10,15 +10,17 @@ const urlsToCache = [
     "/css/signup.css",
     "/css/signin.css",
     "/css/booking.css",
+    "/manifest.json",
     "/assets/images/icons/icon_72x72.png",
     "/assets/images/icons/icon_96x96.png",
-    "/assets/images/icons/icon_128x128.png",  // Corrected icon path
+    "/assets/images/icons/icon_128x128.png",
     "/assets/images/icons/icon_144x144.png",
     "/assets/images/icons/icon_152x152.png",
+    "/assets/images/icons/icon_192x192.png",
+    "/assets/images/icons/icon_512x512.png",
     "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 ];
 
-// Install the service worker and cache resources
 self.addEventListener("install", (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
@@ -30,7 +32,6 @@ self.addEventListener("install", (event) => {
     );
 });
 
-// Cache and update requests
 self.addEventListener("fetch", (event) => {
     event.respondWith(
         caches.match(event.request).then((response) => {
@@ -41,13 +42,12 @@ self.addEventListener("fetch", (event) => {
                 });
             }).catch((error) => {
                 console.error("Fetch failed, returning cached content if available", error);
-                return response;
+                return caches.match(event.request);
             });
         })
     );
 });
 
-// Update the service worker and clean up old caches
 self.addEventListener("activate", (event) => {
     const cacheWhitelist = [CACHE_NAME];
     event.waitUntil(
