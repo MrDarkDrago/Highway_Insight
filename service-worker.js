@@ -32,6 +32,14 @@ self.addEventListener("install", (event) => {
     );
 });
 
+
+window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault(); // Prevent automatic prompt
+    console.log("PWA Installable");
+    // Optionally show your own UI to trigger install
+});
+
+
 self.addEventListener("fetch", (event) => {
     event.respondWith(
         caches.match(event.request).then((response) => {
