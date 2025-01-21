@@ -7,6 +7,8 @@
     "background_color": "#ffffff",
     "theme_color": "#0078D4",
     "orientation": "portrait",
+    "scope": "/",
+    "id": "/",
     "icons": [
         {
             "src": "assets/images/icons/icon_72x72.png",
@@ -32,21 +34,28 @@
             "src": "assets/images/icons/icon_152x152.png",
             "type": "image/png",
             "sizes": "152x152"
+        },
+        {
+            "src": "assets/images/icons/icon_192x192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "assets/images/icons/icon_512x512.png",
+            "type": "image/png",
+            "sizes": "512x512"
         }
-        
     ],
     "screenshots": [
         {
             "src": "assets/images/screenshots/desktop-screenshot.png",
             "sizes": "1280x720",
-            "type": "image/png",
-            "form_factor": "wide"
+            "type": "image/png"
         },
         {
             "src": "assets/images/screenshots/mobile-screenshot.png",
             "sizes": "360x640",
-            "type": "image/png",
-            "form_factor": "narrow"
+            "type": "image/png"
         }
     ]
 }
