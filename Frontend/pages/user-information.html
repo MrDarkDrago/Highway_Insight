@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information - Highway Bus Booking</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/user-information.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar -->
+<div id="navbar-container"></div>
+
+<!-- User Information Section -->
+<section class="user-info-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Complete Your Profile</h2>
+        <p class="text-center">Please provide additional details to complete your registration.</p>
+
+        <!-- User Type Selection -->
+        <div class="mb-4 text-center">
+            <label class="form-label me-3">Select User Type:</label>
+            <input type="radio" name="user-type" value="passenger" id="passenger" checked>
+            <label for="passenger">Passenger</label>
+            <input type="radio" name="user-type" value="operator" id="operator" class="ms-3">
+            <label for="operator">Bus Operator</label>
+        </div>
+
+        <!-- Passenger Form -->
+        <form id="passenger-form" class="user-form">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="passenger-full-name" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="passenger-full-name" placeholder="Enter your full name" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="passenger-contact" class="form-label">Contact Number</label>
+                    <input type="tel" class="form-control" id="passenger-contact" placeholder="Enter your contact number" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="passenger-address" class="form-label">Address</label>
+                    <textarea class="form-control" id="passenger-address" placeholder="Enter your address" rows="3" required></textarea>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+
+        <!-- Operator Form -->
+        <form id="operator-form" class="user-form d-none">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="operator-company-name" class="form-label">Company Name</label>
+                    <input type="text" class="form-control" id="operator-company-name" placeholder="Enter your company name" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="operator-contact" class="form-label">Contact Number</label>
+                    <input type="tel" class="form-control" id="operator-contact" placeholder="Enter your contact number" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="operator-license" class="form-label">License Number</label>
+                    <input type="text" class="form-control" id="operator-license" placeholder="Enter your license number" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="operator-address" class="form-label">Company Address</label>
+                    <textarea class="form-control" id="operator-address" placeholder="Enter your company address" rows="3" required></textarea>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<div id="footer-container"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/user-information.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const navbarContainer = document.getElementById("navbar-container");
+        const footerContainer = document.getElementById("footer-container");
+
+        fetch("/components/navbar.html")
+            .then(response => response.text())
+            .then(html => {
+                navbarContainer.innerHTML = html;
+            })
+            .catch(error => console.error("Error loading navbar:", error));
+
+        fetch("/components/footer.html")
+            .then(response => response.text())
+            .then(html => {
+                footerContainer.innerHTML = html;
+            })
+            .catch(error => console.error("Error loading footer:", error));
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const passengerForm = document.getElementById("passenger-form");
+    const operatorForm = document.getElementById("operator-form");
+    const userTypeInputs = document.querySelectorAll('input[name="user-type"]');
+
+    // Toggle forms based on selected user type
+    userTypeInputs.forEach((input) => {
+        input.addEventListener("change", () => {
+            if (input.value === "passenger") {
+                passengerForm.classList.remove("d-none");
+                operatorForm.classList.add("d-none");
+            } else if (input.value === "operator") {
+                operatorForm.classList.remove("d-none");
+                passengerForm.classList.add("d-none");
+            }
+        });
+    });
+
+    // Handle Passenger Form Submission
+    passengerForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const passengerData = {
+            fullName: document.getElementById("passenger-full-name").value,
+            contact: document.getElementById("passenger-contact").value,
+            address: document.getElementById("passenger-address").value,
+        };
+
+        console.log("Passenger Data:", passengerData);
+        alert("Passenger details submitted successfully!");
+        passengerForm.reset();
+    });
+
+    // Handle Operator Form Submission
+    operatorForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const operatorData = {
+            companyName: document.getElementById("operator-company-name").value,
+            contact: document.getElementById("operator-contact").value,
+            license: document.getElementById("operator-license").value,
+            address: document.getElementById("operator-address").value,
+        };
+
+        console.log("Operator Data:", operatorData);
+        alert("Operator details submitted successfully!");
+        operatorForm.reset();
+    });
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Highway Bus Booking</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar -->
+<div id="navbar-container"></div>
+
+<!-- Dashboard Section -->
+<section class="dashboard-section py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <aside class="col-md-3 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Dashboard</h5>
+                        <ul class="nav flex-column" id="sidebar-nav">
+                            <!-- Dynamic Sidebar Links -->
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <div class="col-md-9" id="main-content">
+                <!-- Dynamic Content Rendered Here -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<div id="footer-container"></div>
+
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Simulating user role (replace with actual backend role fetching logic)
+    const userRole = "operator"; // Set dynamically: "user" or "operator"
+
+    // Data for sentiment analysis (replace with actual API data fetching)
+    const sentimentResults = [
+        { route: "Route A", positive: 70, neutral: 20, negative: 10 },
+        { route: "Route B", positive: 80, neutral: 10, negative: 10 },
+    ];
+
+    // Sidebar and Main Content Rendering
+    document.addEventListener("DOMContentLoaded", () => {
+        const sidebarNav = document.getElementById("sidebar-nav");
+        const mainContent = document.getElementById("main-content");
+        const navbarContainer = document.getElementById("navbar-container");
+        const footerContainer = document.getElementById("footer-container");
+
+        // Fetch and load Navbar and Footer components
+        fetch("/components/navbar.html")
+            .then(response => response.text())
+            .then(html => (navbarContainer.innerHTML = html))
+            .catch(error => console.error("Error loading navbar:", error));
+
+        fetch("/components/footer.html")
+            .then(response => response.text())
+            .then(html => (footerContainer.innerHTML = html))
+            .catch(error => console.error("Error loading footer:", error));
+
+        // Render Dashboard Based on Role
+        if (userRole === "user") {
+            // User (Passenger) Sidebar
+            sidebarNav.innerHTML = `
+                <li class="nav-item"><a href="#upcoming-trips" class="nav-link">Upcoming Trips</a></li>
+                <li class="nav-item"><a href="#booking-history" class="nav-link">Booking History</a></li>
+                <li class="nav-item"><a href="#notifications" class="nav-link">Notifications</a></li>
+                <li class="nav-item"><a href="#account-settings" class="nav-link">Account Settings</a></li>
+            `;
+
+            // User (Passenger) Main Content
+            mainContent.innerHTML = `
+                <div class="mb-4">
+                    <h3>Welcome, Passenger!</h3>
+                    <p class="text-muted">Here's a quick overview of your trips and activities.</p>
+                </div>
+                <div id="upcoming-trips" class="mb-5">
+                    <h5>Upcoming Trips</h5>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <p>No upcoming trips found. <a href="booking.html">Book a trip now!</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="booking-history" class="mb-5">
+                    <h5>Booking History</h5>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <p>No past bookings available.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="notifications" class="mb-5">
+                    <h5>Notifications</h5>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <p>No new notifications.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="account-settings" class="mb-5">
+                    <h5>Account Settings</h5>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <p>Manage your account details and preferences here.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else if (userRole === "operator") {
+            // Operator Sidebar
+            sidebarNav.innerHTML = `
+                <li class="nav-item"><a href="#my-buses" class="nav-link">My Buses</a></li>
+                <li class="nav-item"><a href="#sentiment-results" class="nav-link">Sentiment Results</a></li>
+                <li class="nav-item"><a href="#notifications" class="nav-link">Notifications</a></li>
+                <li class="nav-item"><a href="#account-settings" class="nav-link">Account Settings</a></li>
+            `;
+
+            // Operator Main Content
+            mainContent.innerHTML = `
+                <div class="mb-4">
+                    <h3>Welcome, Operator!</h3>
+                    <p class="text-muted">Here's an overview of your buses and sentiment analysis results.</p>
+                </div>
+                <div id="my-buses" class="mb-5">
+                    <h5>My Buses</h5>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <p>You currently have no buses added. <a href="add-routes.html">Add a bus now!</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="sentiment-results" class="mb-5">
+                    <h5>Sentiment Analysis Results</h5>
+                    ${sentimentResults
+                        .map(
+                            result => `
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-body">
+                                <h6>Route: ${result.route}</h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <canvas id="sentiment-chart-${result.route.replace(' ', '')}" width="200" height="200"></canvas>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>Positive Feedback:</strong> ${result.positive}%</p>
+                                        <p><strong>Neutral Feedback:</strong> ${result.neutral}%</p>
+                                        <p><strong>Negative Feedback:</strong> ${result.negative}%</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                        )
+                        .join("")}
+                </div>
+                <div id="notifications" class="mb-5">
+                    <h5>Notifications</h5>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <p>No new notifications.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="account-settings" class="mb-5">
+                    <h5>Account Settings</h5>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <p>Manage your account details and preferences here.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render Pie Chart for each route sentiment
+        sentimentResults.forEach(result => {
+            const ctx = document.getElementById(`sentiment-chart-${result.route.replace(' ', '')}`).getContext("2d");
+
+            new Chart(ctx, {
+                type: "pie",
+                data: {
+                    labels: ["Positive", "Neutral", "Negative"],
+                    datasets: [{
+                        data: [result.positive, result.neutral, result.negative],
+                        backgroundColor: ["#28a745", "#ffc107", "#dc3545"],
+                        hoverBackgroundColor: ["#218838", "#e0a800", "#c82333"]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    const label = tooltipItem.label;
+                                    const value = tooltipItem.raw;
+                                    return `${label}: ${value}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

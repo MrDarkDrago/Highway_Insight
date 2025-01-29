@@ -2,6 +2,7 @@ const CACHE_NAME = "bus-booking-cache-v1";
 const urlsToCache = [
     "/Highway_Insight/",
     "/Highway_Insight/index.html",
+    "/Highway_Insight/pages/home.html",
     "/Highway_Insight/dashboard.html",
     "/Highway_Insight/booking.html",
     "/Highway_Insight/signin.html",

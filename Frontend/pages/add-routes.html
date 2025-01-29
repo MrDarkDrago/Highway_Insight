@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Routes - Highway Bus Booking</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/add-routes.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar -->
+<div id="navbar-container"></div>
+
+<!-- Add Routes Section -->
+<section class="add-routes-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Add New Bus Routes</h2>
+
+        <form id="add-route-form" class="row g-3">
+            <div class="col-md-4">
+                <label for="route-origin" class="form-label">Origin</label>
+                <input type="text" class="form-control" id="route-origin" placeholder="Enter origin" required>
+            </div>
+            <div class="col-md-4">
+                <label for="route-destination" class="form-label">Destination</label>
+                <input type="text" class="form-control" id="route-destination" placeholder="Enter destination" required>
+            </div>
+            <div class="col-md-4">
+                <label for="route-price" class="form-label">Price (USD)</label>
+                <input type="number" class="form-control" id="route-price" placeholder="Enter price" min="1" required>
+            </div>
+            <div class="col-md-6">
+                <label for="route-departure" class="form-label">Departure Time</label>
+                <input type="time" class="form-control" id="route-departure" required>
+            </div>
+            <div class="col-md-6">
+                <label for="route-arrival" class="form-label">Arrival Time</label>
+                <input type="time" class="form-control" id="route-arrival" required>
+            </div>
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary mt-4">Add Route</button>
+            </div>
+        </form>
+
+        <hr class="my-5">
+
+        <!-- Routes List -->
+        <div class="routes-list">
+            <h3>Current Routes</h3>
+            <div id="routes-container" class="mt-4">
+                <p>No routes added yet.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="footer-container"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/add-routes.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const navbarContainer = document.getElementById("navbar-container");
+        const footerContainer = document.getElementById("footer-container");
+
+        fetch("/components/navbar.html")
+            .then(response => response.text())
+            .then(html => {
+                navbarContainer.innerHTML = html;
+            })
+            .catch(error => console.error("Error loading navbar:", error));
+
+        fetch("/components/footer.html")
+            .then(response => response.text())
+            .then(html => {
+                footerContainer.innerHTML = html;
+            })
+            .catch(error => console.error("Error loading footer:", error));
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const addRouteForm = document.getElementById("add-route-form");
+    const routesContainer = document.getElementById("routes-container");
+
+    let routes = []; // Array to store routes
+
+    // Function to render the routes
+    const renderRoutes = () => {
+        routesContainer.innerHTML = "";
+        if (routes.length === 0) {
+            routesContainer.innerHTML = "<p>No routes added yet.</p>";
+            return;
+        }
+
+        routes.forEach((route, index) => {
+            const routeCard = `
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">${route.origin} to ${route.destination}</h5>
+                        <p class="card-text">Departure: ${route.departure} | Arrival: ${route.arrival}</p>
+                        <p class="card-text">Price: $${route.price}</p>
+                        <button class="btn btn-danger" onclick="deleteRoute(${index})">Delete</button>
+                    </div>
+                </div>
+            `;
+            routesContainer.innerHTML += routeCard;
+        });
+    };
+
+    // Add new route
+    addRouteForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const origin = document.getElementById("route-origin").value;
+        const destination = document.getElementById("route-destination").value;
+        const price = document.getElementById("route-price").value;
+        const departure = document.getElementById("route-departure").value;
+        const arrival = document.getElementById("route-arrival").value;
+
+        const newRoute = { origin, destination, price, departure, arrival };
+        routes.push(newRoute);
+
+        renderRoutes();
+
+        // Reset form fields
+        addRouteForm.reset();
+    });
+
+    // Delete a route
+    window.deleteRoute = (index) => {
+        routes.splice(index, 1);
+        renderRoutes();
+    };
+
+    // Initial render
+    renderRoutes();
+});
+
+</script>
+
+</body>
+</html>
