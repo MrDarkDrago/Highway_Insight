@@ -199,3 +199,23 @@ footer {
         margin-top: 15px;
     }
 }
+
+
+.select2-container .select2-selection--single {
+    height: 38px !important; /* Match the Bootstrap form-control height */
+    padding: 6px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 26px; /* Align text properly */
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 38px !important;
+}
+
+#date {
+    height: 38px; /* Match the select2 height */
+}
